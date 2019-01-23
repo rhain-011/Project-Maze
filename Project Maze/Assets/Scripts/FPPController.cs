@@ -6,10 +6,10 @@ using UnityEngine;
 public class FPPController : MonoBehaviour
 {
     // public vars
-    public float mouseSensitivityX = 3.5f;
-    public float mouseSensitivityY = 3.5f;
-    public float walkSpeed = 6;
-    public float jumpForce = 220;
+    public float mouseSensitivityX = 3f;
+    public float mouseSensitivityY = 3f;
+    public float walkSpeed = 2.5f;
+    public float jumpForce = 220f;
     public float fallMultiplier = 2.5f;
     
     public LayerMask groundedMask;
@@ -29,6 +29,7 @@ public class FPPController : MonoBehaviour
         Cursor.visible = false;
         cameraTransform = Camera.main.transform;
         rigidbody = GetComponent<Rigidbody>();
+        rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
     }
 
     void Update()
