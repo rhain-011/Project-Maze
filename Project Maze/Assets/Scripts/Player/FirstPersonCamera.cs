@@ -28,7 +28,7 @@ public class FirstPersonCamera : MonoBehaviour
         // Look rotation:
         transform.Rotate(Vector3.up * Input.GetAxis("Mouse X") * mouseSensitivityX);
         verticalLookRotation += Input.GetAxis("Mouse Y") * mouseSensitivityY;
-        verticalLookRotation = Mathf.Clamp(verticalLookRotation, -45, 45);
+        verticalLookRotation = Mathf.Clamp(verticalLookRotation, -60, 60); // limit look rotation in the y axis
         firstPersonCameraTransform.localEulerAngles = Vector3.left * verticalLookRotation;
 
 
