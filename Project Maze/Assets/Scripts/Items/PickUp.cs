@@ -1,6 +1,11 @@
-﻿using System.Collections;
+﻿/*
+ Author: Rhainel Peralta
+ */
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+
 
 public class PickUp : MonoBehaviour
 {
