@@ -1,4 +1,7 @@
-﻿using System.Collections;
+﻿/*
+ Author: Rhainel Peralta
+ */
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -27,5 +30,14 @@ public class FirstPersonCamera : MonoBehaviour
         verticalLookRotation += Input.GetAxis("Mouse Y") * mouseSensitivityY;
         verticalLookRotation = Mathf.Clamp(verticalLookRotation, -45, 45);
         firstPersonCameraTransform.localEulerAngles = Vector3.left * verticalLookRotation;
+
+
+
+        // get back mouse cursor
+        if (Input.GetKeyDown("escape"))
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
     }
 }

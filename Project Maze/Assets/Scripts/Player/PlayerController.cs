@@ -1,4 +1,7 @@
-﻿using System.Collections;
+﻿/*
+ Author: Rhainel Peralta
+ */
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,12 +9,14 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     // player movement
-    public float walkSpeed = 2.5f;
-    public float jumpForce = 220f;
-    public float fallMultiplier = 2.5f;
+    [SerializeField] float fallMultiplier = 2.5f;
+    [SerializeField] bool grounded;
     public LayerMask groundedMask;
-    public bool grounded;
+    public float walkSpeed = 2.0f;
+    public float sprintSpeed = 3.0f;
+    public float jumpForce = 220f;
 
+    Vector3 targetMoveAmount;
     Vector3 smoothMoveVelocity;
     private new Rigidbody rigidbody;
 
@@ -25,13 +30,22 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         // Calculate movement:
-        float inputX = Input.GetAxisRaw("Horizontal") * Time.deltaTime;
-        float inputY = Input.GetAxisRaw("Vertical") * Time.deltaTime;
+        float inputX = Input.GetAxisRaw("Horizontal") * walkSpeed * Time.deltaTime;
+        float inputY = Input.GetAxisRaw("Vertical") * walkSpeed * Time.deltaTime;
 
         Vector3 moveDir = new Vector3(inputX, 0, inputY);
-        Vector3 targetMoveAmount = moveDir * walkSpeed;
 
+        // run
+        if (Input.GetKey("left shift"))
+        {
+            targetMoveAmount = moveDir * sprintSpeed;
+        }
+        else
+        {
+            targetMoveAmount = moveDir * walkSpeed;
+        }
 
         // Jump
         if (Input.GetButtonDown("Jump"))
@@ -59,12 +73,6 @@ public class PlayerController : MonoBehaviour
             grounded = false;
         }
 
-
-        // get back mouse cursor
-        if (Input.GetKeyDown("escape"))
-        {
-            Cursor.lockState = CursorLockMode.None;
-        }
         transform.Translate(targetMoveAmount);
     }
 }
