@@ -23,7 +23,9 @@ public class PickUp : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        distance = Vector2.Distance(item.transform.position, tempParent.transform.position);
+        distance = Vector3.Distance(item.transform.position, tempParent.transform.position);
+
+        // checks how far the player is to the object
         if(distance >= 1f)
         {
             isHolding = false;
@@ -35,9 +37,10 @@ public class PickUp : MonoBehaviour
             itemRb.angularVelocity = Vector3.zero;
             item.transform.SetParent(tempParent.transform);
 
+            // throw object
             if (Input.GetMouseButton(1))
             {
-                //throw
+                
                 itemRb.AddForce(tempParent.transform.forward * throwForce);
                 isHolding = false;
             }

@@ -42,12 +42,12 @@ public class FPPController : MonoBehaviour
         cameraTransform.localEulerAngles = Vector3.left * verticalLookRotation;
 
         // Calculate movement:
-        float inputX = Input.GetAxisRaw("Horizontal");
-        float inputY = Input.GetAxisRaw("Vertical");
+        float inputX = Input.GetAxisRaw("Horizontal") * Time.deltaTime;
+        float inputY = Input.GetAxisRaw("Vertical") * Time.deltaTime;
 
-        Vector3 moveDir = new Vector3(inputX, 0, inputY).normalized;
+        Vector3 moveDir = new Vector3(inputX, 0, inputY);
         Vector3 targetMoveAmount = moveDir * walkSpeed;
-        moveAmount = Vector3.SmoothDamp(moveAmount, targetMoveAmount, ref smoothMoveVelocity, .15f);
+        
 
         // Jump
         if (Input.GetButtonDown("Jump"))
@@ -81,13 +81,13 @@ public class FPPController : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.None;
         }
-
+        transform.Translate(targetMoveAmount);
     }
 
-    void FixedUpdate()
-    {
-        // Apply movement to rigidbody
-        Vector3 localMove = transform.TransformDirection(moveAmount) * Time.fixedDeltaTime;
-        rigidbody.MovePosition(rigidbody.position + localMove);
-    }
+    //void FixedUpdate()
+    //{
+    //    // Apply movement to rigidbody
+    //    Vector3 localMove = transform.TransformDirection(moveAmount) * Time.fixedDeltaTime;
+    //    rigidbody.MovePosition(rigidbody.position + localMove);
+    //}
 }
