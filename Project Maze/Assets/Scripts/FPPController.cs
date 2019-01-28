@@ -68,9 +68,8 @@ public class FPPController : MonoBehaviour
 
         // Grounded check
         Ray ray = new Ray(transform.position, -transform.up);
-        RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, 1.5f, groundedMask))
+        if (Physics.Raycast(ray, out RaycastHit hit, 1.5f, groundedMask))
         {
             grounded = true;
         }

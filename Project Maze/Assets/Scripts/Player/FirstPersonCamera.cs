@@ -1,5 +1,5 @@
 ﻿/*
- Author: Rhainel Peralta
+ Coded by: Rhainel Peralta
  */
 using System.Collections;
 using System.Collections.Generic;

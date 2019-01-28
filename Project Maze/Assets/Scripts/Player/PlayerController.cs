@@ -1,5 +1,5 @@
 ﻿/*
- Author: Rhainel Peralta
+ Coded by: Rhainel Peralta
  */
 using System.Collections;
 using System.Collections.Generic;
@@ -9,22 +9,29 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     // player movement
-    [SerializeField] float fallMultiplier = 2.5f;
     [SerializeField] bool grounded;
     public LayerMask groundedMask;
-    public float walkSpeed = 2.0f;
-    public float sprintSpeed = 3.0f;
-    public float jumpForce = 220f;
+
+    private float walkSpeed;
+    private float sprintSpeed;
+    private float jumpForce;
+    private float fallMultiplier;
 
     Vector3 targetMoveAmount;
-    Vector3 smoothMoveVelocity;
-    private new Rigidbody rigidbody;
+    private Rigidbody rb;
+    private PlayerStatManager playerStat;
 
     // Start is called before the first frame update
     void Awake()
     {
-        rigidbody = GetComponent<Rigidbody>();
-        rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+        rb = GetComponent<Rigidbody>();
+        rb.constraints = RigidbodyConstraints.FreezeRotation;
+
+        playerStat = GetComponent<PlayerStatManager>();
+        walkSpeed = playerStat.p_DefaultWalkSpeed;
+        sprintSpeed = playerStat.p_DefaultRunSpeed;
+        jumpForce = playerStat.p_DefaultJumForce;
+        fallMultiplier = playerStat.p_DefaultFallMultiplier;
     }
 
     // Update is called once per frame
@@ -47,24 +54,9 @@ public class PlayerController : MonoBehaviour
             targetMoveAmount = moveDir * walkSpeed;
         }
 
-        // Jump
-        if (Input.GetButtonDown("Jump"))
-        {
-            if (grounded)
-            {
-                rigidbody.AddForce(transform.up * jumpForce);
-            }
-        }
-        if (!grounded)
-        {
-            rigidbody.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
-        }
-
-        // Grounded check
+        // checks if player is on the ground
         Ray ray = new Ray(transform.position, -transform.up);
-        RaycastHit hit;
-
-        if (Physics.Raycast(ray, out hit, 1.5f, groundedMask))
+        if (Physics.Raycast(ray, out RaycastHit hit, 1.5f, groundedMask))
         {
             grounded = true;
         }
@@ -73,6 +65,21 @@ public class PlayerController : MonoBehaviour
             grounded = false;
         }
 
+        // Jump
+        if (Input.GetButtonDown("Jump"))
+        {
+            if (grounded)
+            {
+                rb.AddForce(transform.up * jumpForce);
+            }
+        }
+        // accelerate fall after player jumps
+        if (!grounded)
+        {
+            rb.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+        }
+
+        // move player
         transform.Translate(targetMoveAmount);
     }
 }
