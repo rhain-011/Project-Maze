@@ -258,13 +258,17 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 100138, guid: 5c293eb09b7357e4bb5b7273e88caaae, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 400138, guid: 5c293eb09b7357e4bb5b7273e88caaae, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400138, guid: 5c293eb09b7357e4bb5b7273e88caaae, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.001
       objectReference: {fileID: 0}
     - target: {fileID: 400138, guid: 5c293eb09b7357e4bb5b7273e88caaae, type: 3}
       propertyPath: m_LocalPosition.z
@@ -734,7 +738,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 25.8, y: 0, z: 0}
 --- !u!114 &727937051
 MonoBehaviour:
@@ -1286,6 +1290,66 @@ Transform:
   m_Father: {fileID: 2015802671}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1467773667
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1467773668}
+  m_Layer: 0
+  m_Name: GroundChecker (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1467773668
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1467773667}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.95, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1749366455}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1606436085
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1606436086}
+  m_Layer: 0
+  m_Name: GroundChecker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1606436086
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1606436085}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.05, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1660082801}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1660082797 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100138, guid: 5c293eb09b7357e4bb5b7273e88caaae,
@@ -1307,7 +1371,8 @@ MonoBehaviour:
   isWalking: 0
   isRunning: 0
   isJumping: 0
-  grounded: 0
+  grounded: 1
+  groundCheck: {fileID: 1606436086}
   groundedMask:
     serializedVersion: 2
     m_Bits: 512
@@ -1327,8 +1392,8 @@ MonoBehaviour:
   p_Stamina: 50
   p_DefaultWalkSpeed: 1.2
   p_DefaultRunSpeed: 2
-  p_DefaultJumForce: 200
-  p_DefaultFallMultiplier: 2.5
+  p_DefaultJumForce: 220
+  p_DefaultFallMultiplier: 1.5
 --- !u!4 &1660082801 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400138, guid: 5c293eb09b7357e4bb5b7273e88caaae,
@@ -1350,7 +1415,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &1660082803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1366,6 +1431,7 @@ MonoBehaviour:
   mouseSensitivityX: 3
   mouseSensitivityY: 3
   firstPersonCameraTransform: {fileID: 1971370362}
+  vertLookClamp: 45
 --- !u!136 &1660082804
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1421,7 +1487,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1674030850}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 2.5}
+  m_LocalPosition: {x: 0, y: 0, z: 1.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1971370362}
@@ -1543,6 +1609,7 @@ MonoBehaviour:
   isRunning: 0
   isJumping: 0
   grounded: 0
+  groundCheck: {fileID: 1467773668}
   groundedMask:
     serializedVersion: 2
     m_Bits: 512
@@ -1562,6 +1629,7 @@ MonoBehaviour:
   mouseSensitivityX: 3
   mouseSensitivityY: 3
   firstPersonCameraTransform: {fileID: 985919730}
+  vertLookClamp: 45
 --- !u!54 &1749366451
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1654,8 +1722,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 985919730}
+  - {fileID: 1467773668}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &1749366456
 AudioSource:
@@ -1770,7 +1839,7 @@ MonoBehaviour:
   p_DefaultWalkSpeed: 1.5
   p_DefaultRunSpeed: 2
   p_DefaultJumForce: 200
-  p_DefaultFallMultiplier: 2.5
+  p_DefaultFallMultiplier: 1.5
 --- !u!114 &1749366458
 MonoBehaviour:
   m_ObjectHideFlags: 0

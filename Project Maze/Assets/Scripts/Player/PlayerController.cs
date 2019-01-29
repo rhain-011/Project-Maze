@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] bool isRunning;
     [SerializeField] bool isJumping;
     [SerializeField] bool grounded;
+    public Transform groundCheck;
     public LayerMask groundedMask;
 
     private float walkSpeed;
@@ -24,7 +25,6 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
     private PlayerStatManager playerStat;
     private Animator anim;
-
     // Start is called before the first frame update
     void Awake()
     {
@@ -46,19 +46,10 @@ public class PlayerController : MonoBehaviour
         float inputY = Input.GetAxisRaw("Vertical") * walkSpeed * Time.deltaTime;
         moveDir = new Vector3(inputX, 0, inputY);
 
-        //// run
-        //if (Input.GetKey("left shift"))
-        //{
-        //    targetMoveAmount = moveDir * sprintSpeed;
-        //}
-        //else
-        //{
-        //    targetMoveAmount = moveDir * walkSpeed;
-        //}
-
         // checks if player is on the ground
-        Ray ray = new Ray(transform.position, -transform.up);
-        if (Physics.Raycast(ray, out RaycastHit hit, 1.5f, groundedMask))
+        Ray ray = new Ray(groundCheck.transform.position, -groundCheck.transform.up);
+        Debug.DrawRay(transform.position, -transform.up);
+        if (Physics.Raycast(ray, out RaycastHit hit, 0.08f, groundedMask))
         {
             grounded = true;
         }
@@ -112,7 +103,5 @@ public class PlayerController : MonoBehaviour
             anim.SetBool("isWalking", isWalking);
             anim.SetBool("isRunning", isRunning);
         }
-
-
     }
 }
