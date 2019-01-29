@@ -9,8 +9,8 @@ public class PlayerStatManager : MonoBehaviour
     public float p_Stamina = 50.0f;
 
     // Movement Stats
-    public float p_DefaultWalkSpeed = 2.0f;
-    public float p_DefaultRunSpeed = 3.0f;
+    public float p_DefaultWalkSpeed = 1.0f;
+    public float p_DefaultRunSpeed = 2.0f;
     public float p_DefaultJumForce = 200.0f;
     public float p_DefaultFallMultiplier = 2.5f;
 }

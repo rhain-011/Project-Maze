@@ -9,6 +9,9 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     // player movement
+    [SerializeField] bool isWalking;
+    [SerializeField] bool isRunning;
+    [SerializeField] bool isJumping;
     [SerializeField] bool grounded;
     public LayerMask groundedMask;
 
@@ -16,17 +19,18 @@ public class PlayerController : MonoBehaviour
     private float sprintSpeed;
     private float jumpForce;
     private float fallMultiplier;
-
-    Vector3 targetMoveAmount;
+    private Vector3 moveDir = Vector3.zero;
+    private Vector3 targetMoveAmount = Vector3.zero;
     private Rigidbody rb;
     private PlayerStatManager playerStat;
+    private Animator anim;
 
     // Start is called before the first frame update
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.FreezeRotation;
-
+        anim = GetComponent<Animator>();
         playerStat = GetComponent<PlayerStatManager>();
         walkSpeed = playerStat.p_DefaultWalkSpeed;
         sprintSpeed = playerStat.p_DefaultRunSpeed;
@@ -37,22 +41,20 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         // Calculate movement:
         float inputX = Input.GetAxisRaw("Horizontal") * walkSpeed * Time.deltaTime;
         float inputY = Input.GetAxisRaw("Vertical") * walkSpeed * Time.deltaTime;
+        moveDir = new Vector3(inputX, 0, inputY);
 
-        Vector3 moveDir = new Vector3(inputX, 0, inputY);
-
-        // run
-        if (Input.GetKey("left shift"))
-        {
-            targetMoveAmount = moveDir * sprintSpeed;
-        }
-        else
-        {
-            targetMoveAmount = moveDir * walkSpeed;
-        }
+        //// run
+        //if (Input.GetKey("left shift"))
+        //{
+        //    targetMoveAmount = moveDir * sprintSpeed;
+        //}
+        //else
+        //{
+        //    targetMoveAmount = moveDir * walkSpeed;
+        //}
 
         // checks if player is on the ground
         Ray ray = new Ray(transform.position, -transform.up);
@@ -80,6 +82,37 @@ public class PlayerController : MonoBehaviour
         }
 
         // move player
-        transform.Translate(targetMoveAmount);
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
+        {
+            //Debug.Log("TargerMovAmount = " + targetMoveAmount.magnitude);
+            isWalking = true;
+            targetMoveAmount = moveDir * walkSpeed;
+            anim.SetBool("isWalking", isWalking);
+
+            // run
+            if (Input.GetKey("left shift"))
+            {
+                isRunning = true;
+                targetMoveAmount = moveDir * sprintSpeed;
+                anim.SetBool("isRunning", isRunning);
+            }
+            else
+            {
+                isRunning = false;
+                //targetMoveAmount = moveDir * walkSpeed;
+                anim.SetBool("isRunning", isRunning);
+            }
+
+            transform.Translate(targetMoveAmount);
+        }
+        else
+        {
+            isWalking = false;
+            isRunning = false;
+            anim.SetBool("isWalking", isWalking);
+            anim.SetBool("isRunning", isRunning);
+        }
+
+
     }
 }
