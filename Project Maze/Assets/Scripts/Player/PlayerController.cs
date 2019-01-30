@@ -8,10 +8,11 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
 {
-    // player movement
+    // player movement anim
     [SerializeField] bool isWalking;
     [SerializeField] bool isRunning;
     [SerializeField] bool isJumping;
+
     [SerializeField] bool grounded;
     public Transform groundCheck;
     public LayerMask groundedMask;
