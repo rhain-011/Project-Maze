@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class TopDownPlayerController : MonoBehaviour
 {
+    [SerializeField] bool isWalking;
+    [SerializeField] bool isRunning;
+    [SerializeField] bool isJumping;
     [SerializeField] bool grounded;
+    public Transform groundCheck;
     public LayerMask groundedMask;
     public Animator anim;
 
@@ -34,38 +38,15 @@ public class TopDownPlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // todo test, remove if
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
-        {
-            float inputX = Input.GetAxisRaw("Horizontal") * walkSpeed * Time.deltaTime;
-            float inputY = Input.GetAxisRaw("Vertical") * walkSpeed * Time.deltaTime;
-            moveDir = new Vector3(inputX, 0, inputY);
-            anim.SetBool("isWalking", true);
-        }
-        else { anim.SetBool("isWalking", false); }
-
-        //// run
-        //if (Input.GetKey("left shift"))
-        //{
-        //    targetMoveAmount = moveDir * sprintSpeed;
-        //    anim.SetBool("isWalking", false);
-        //    anim.SetBool("isRunning", true);
-        //}
-        //else if(Input.GetKeyUp("left shift"))
-        //{
-        //    targetMoveAmount = moveDir * walkSpeed;
-        //    anim.SetBool("isRunning", false);
-        //    anim.SetBool("isWalking", true);
-        //}
-        //else
-        //{
-        //    anim.SetBool("isRunning", false);
-        //    anim.SetBool("isWalking", false);
-        //}
+        // Calculate movement:
+        float inputX = Input.GetAxisRaw("Horizontal") * walkSpeed * Time.deltaTime;
+        float inputY = Input.GetAxisRaw("Vertical") * walkSpeed * Time.deltaTime;
+        moveDir = new Vector3(inputX, 0, inputY);
 
         // checks if player is on the ground
-        Ray ray = new Ray(transform.position, -transform.up);
-        if (Physics.Raycast(ray, out RaycastHit hit, 1.5f, groundedMask))
+        Ray ray = new Ray(groundCheck.transform.position, -groundCheck.transform.up);
+        Debug.DrawRay(transform.position, -transform.up);
+        if (Physics.Raycast(ray, out RaycastHit hit, 0.08f, groundedMask))
         {
             grounded = true;
         }
@@ -88,8 +69,36 @@ public class TopDownPlayerController : MonoBehaviour
             rb.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         }
 
-        transform.Translate(targetMoveAmount);
-        Debug.Log("TargerMOvAmount = " + targetMoveAmount.normalized);
+        // move player
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
+        {
+            //Debug.Log("TargerMovAmount = " + targetMoveAmount.magnitude);
+            isWalking = true;
+            targetMoveAmount = moveDir * walkSpeed;
+            anim.SetBool("isWalking", isWalking);
+
+            // run
+            if (Input.GetKey("left shift"))
+            {
+                isRunning = true;
+                targetMoveAmount = moveDir * sprintSpeed;
+                anim.SetBool("isRunning", isRunning);
+            }
+            else
+            {
+                isRunning = false;
+                //targetMoveAmount = moveDir * walkSpeed;
+                anim.SetBool("isRunning", isRunning);
+            }
+
+            transform.Translate(targetMoveAmount);
+        }
+        else
+        {
+            isWalking = false;
+            isRunning = false;
+            anim.SetBool("isWalking", isWalking);
+            anim.SetBool("isRunning", isRunning);
+        }
     }
-    
 }
