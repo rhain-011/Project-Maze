@@ -8,13 +8,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
 {
-    // player movement anim
-    // todo create seperate script for animations
-    [SerializeField] bool isWalking;
-    [SerializeField] bool isRunning;
-    [SerializeField] bool isJumping;
-
-    [SerializeField] bool grounded;
+    [SerializeField] bool isGrounded;
     public Transform groundCheck;
     public LayerMask groundedMask;
 
@@ -23,7 +17,9 @@ public class PlayerController : MonoBehaviour
     private float jumpForce;
     private float fallMultiplier;
     private Vector3 moveDir = Vector3.zero;
-    private Vector3 targetMoveAmount = Vector3.zero;
+    public Vector3 targetMoveAmount = Vector3.zero;
+    public float inputX = 0.0f;
+    public float inputY = 0.0f;
     private Rigidbody rb;
     private PlayerStatManager playerStat;
     private Animator anim;
@@ -45,69 +41,51 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         // Calculate movement:
-        float inputX = Input.GetAxisRaw("Horizontal") * walkSpeed * Time.deltaTime;
-        float inputY = Input.GetAxisRaw("Vertical") * walkSpeed * Time.deltaTime;
+        inputX = Input.GetAxis("Horizontal");
+        inputY = Input.GetAxis("Vertical");
 
-        moveDir = new Vector3(inputX, 0, inputY);
+        float finalInputX = inputX * walkSpeed * Time.deltaTime;
+        float finalInputY = inputY * walkSpeed * Time.deltaTime;
+
+
+        moveDir = new Vector3(finalInputX, 0, finalInputY);
         
         // checks if player is on the ground
         Ray ray = new Ray(groundCheck.transform.position, -groundCheck.transform.up);
-        Debug.DrawRay(transform.position, -transform.up);
+        //Debug.DrawRay(transform.position, -transform.up);
         if (Physics.Raycast(ray, out RaycastHit hit, 0.08f, groundedMask))
         {
-            grounded = true;
+            isGrounded = true;
         }
         else
         {
-            grounded = false;
+            isGrounded = false;
         }
 
         // Jump
         if (Input.GetButtonDown("Jump"))
         {
-            if (grounded)
+            if (isGrounded)
             {
                 rb.AddForce(transform.up * jumpForce);
             }
         }
         // accelerate fall after player jumps
-        if (!grounded)
+        if (!isGrounded)
         {
             rb.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         }
 
         // move player
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
+        targetMoveAmount = moveDir;
+        
+        // run
+        if (Input.GetKey("left shift"))
         {
-            isWalking = true;
-
-            targetMoveAmount = moveDir;
-
-            anim.SetBool("isWalking", isWalking);
-
-            // run
-            if (Input.GetKey("left shift"))
-            {
-                isRunning = true;
-
-                targetMoveAmount = moveDir * sprintSpeed;
-
-                anim.SetBool("isRunning", isRunning);
-            }
-            else
-            {
-                isRunning = false;
-                anim.SetBool("isRunning", isRunning);
-            }
-
-            transform.Translate(targetMoveAmount);
+            targetMoveAmount = moveDir * sprintSpeed;
         }
-        else // player goes idle
-        {
-            isWalking = false;
-            isRunning = false;
-            anim.SetBool("isWalking", isWalking);
-            anim.SetBool("isRunning", isRunning);
-        }
+
+        transform.Translate(targetMoveAmount);
+
     }
 }
