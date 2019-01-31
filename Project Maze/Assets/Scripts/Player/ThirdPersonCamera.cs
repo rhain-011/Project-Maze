@@ -7,23 +7,16 @@ public class ThirdPersonCamera : MonoBehaviour
 {
 
     public GameObject camFollowObj;
-    public GameObject tppCam;
-    public GameObject playerObj;
     public float camMoveSpeed = 120.0f;
-    public float clampAngle = 80.0f;
+    public float clampAngle = 80.0f; // indicates how far player can look on each axis;
     public float inputSensitivity = 150.0f;
-    public float camDistanceToPlayerX;
-    public float camDistanceToPlayerY;
-    public float camDistanceToPlayerZ;
     public float mouseX;
     public float mouseY;
 
-    // for controller support
+    // added for controller support
     public float finalInputX;
     public float finalInputZ;
 
-    public float smoothX;
-    public float smoothY;
     private float rotX = 0.0f;
     private float rotY = 0.0f;
 

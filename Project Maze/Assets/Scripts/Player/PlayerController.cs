@@ -9,6 +9,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     // player movement anim
+    // todo create seperate script for animations
     [SerializeField] bool isWalking;
     [SerializeField] bool isRunning;
     [SerializeField] bool isJumping;
@@ -76,16 +77,19 @@ public class PlayerController : MonoBehaviour
         // move player
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
         {
-            //Debug.Log("TargerMovAmount = " + targetMoveAmount.magnitude);
             isWalking = true;
-            targetMoveAmount = moveDir * walkSpeed;
+
+            targetMoveAmount = moveDir;
+
             anim.SetBool("isWalking", isWalking);
 
             // run
             if (Input.GetKey("left shift"))
             {
                 isRunning = true;
+
                 targetMoveAmount = moveDir * sprintSpeed;
+
                 anim.SetBool("isRunning", isRunning);
             }
             else
@@ -97,7 +101,7 @@ public class PlayerController : MonoBehaviour
 
             transform.Translate(targetMoveAmount);
         }
-        else
+        else // player goes idle
         {
             isWalking = false;
             isRunning = false;

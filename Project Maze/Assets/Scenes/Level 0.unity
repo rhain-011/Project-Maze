@@ -328,7 +328,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &475996486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -342,20 +342,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camFollowObj: {fileID: 1764779576}
-  tppCam: {fileID: 0}
-  playerObj: {fileID: 0}
   camMoveSpeed: 120
   clampAngle: 60
-  inputSensitivity: 150
-  camDistanceToPlayerX: 0
-  camDistanceToPlayerY: 0
-  camDistanceToPlayerZ: 0
+  inputSensitivity: 50
   mouseX: 0
   mouseY: 0
   finalInputX: 0
   finalInputZ: 0
-  smoothX: 0
-  smoothY: 0
 --- !u!4 &475996487
 Transform:
   m_ObjectHideFlags: 0
@@ -792,13 +785,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 727937049}
-  m_LocalRotation: {x: 0.22325005, y: 0, z: 0, w: 0.9747612}
-  m_LocalPosition: {x: 0, y: 5, z: -8.57}
+  m_LocalRotation: {x: 0.24619603, y: -0, z: -0, w: 0.96922004}
+  m_LocalPosition: {x: 0, y: 4.77, z: -4.85}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 25.8, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 28.505001, y: 0, z: 0}
 --- !u!114 &727937051
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -806,7 +799,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 727937049}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8d244425787a4534e97383dab14ff5a7, type: 3}
   m_Name: 
@@ -814,6 +807,7 @@ MonoBehaviour:
   m_Player: {fileID: 1660082801}
   m_SmoothSpeed: 0.5
   m_Heigth: 5
+  zOffset: 5
 --- !u!81 &727937052
 AudioListener:
   m_ObjectHideFlags: 0
@@ -1522,7 +1516,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1660082797}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1bfe7685f125fe848a2022407714a831, type: 3}
   m_Name: 
@@ -1530,7 +1524,7 @@ MonoBehaviour:
   isWalking: 0
   isRunning: 0
   isJumping: 0
-  grounded: 1
+  grounded: 0
   groundCheck: {fileID: 1606436086}
   groundedMask:
     serializedVersion: 2
@@ -1582,7 +1576,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1660082797}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: be55a46c4b7d3444dbab58025a8c6c65, type: 3}
   m_Name: 
@@ -2123,7 +2117,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1764779577}
   m_Layer: 0
-  m_Name: CameraFollow
+  m_Name: CameraFollowTpp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2160,7 +2154,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1971370362
 Transform:
   m_ObjectHideFlags: 0
