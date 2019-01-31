@@ -1809,7 +1809,6 @@ GameObject:
   - component: {fileID: 1749366457}
   - component: {fileID: 1749366450}
   - component: {fileID: 1749366449}
-  - component: {fileID: 1749366458}
   - component: {fileID: 1749366456}
   - component: {fileID: 1749366459}
   m_Layer: 0
@@ -2067,27 +2066,6 @@ MonoBehaviour:
   p_DefaultRunSpeed: 2
   p_DefaultJumForce: 200
   p_DefaultFallMultiplier: 1.5
---- !u!114 &1749366458
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1749366448}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c20c84f916da21947b9892b76df3d2dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isWalking: 0
-  isRunning: 0
-  isJumping: 0
-  grounded: 0
-  groundCheck: {fileID: 0}
-  groundedMask:
-    serializedVersion: 2
-    m_Bits: 512
-  anim: {fileID: 0}
 --- !u!95 &1749366459
 Animator:
   serializedVersion: 3

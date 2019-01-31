@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
     private PlayerStatManager playerStat;
     private Animator anim;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -46,8 +47,9 @@ public class PlayerController : MonoBehaviour
         // Calculate movement:
         float inputX = Input.GetAxisRaw("Horizontal") * walkSpeed * Time.deltaTime;
         float inputY = Input.GetAxisRaw("Vertical") * walkSpeed * Time.deltaTime;
-        moveDir = new Vector3(inputX, 0, inputY);
 
+        moveDir = new Vector3(inputX, 0, inputY);
+        
         // checks if player is on the ground
         Ray ray = new Ray(groundCheck.transform.position, -groundCheck.transform.up);
         Debug.DrawRay(transform.position, -transform.up);
@@ -95,7 +97,6 @@ public class PlayerController : MonoBehaviour
             else
             {
                 isRunning = false;
-                //targetMoveAmount = moveDir * walkSpeed;
                 anim.SetBool("isRunning", isRunning);
             }
 
