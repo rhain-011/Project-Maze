@@ -1,4 +1,5 @@
-﻿// Amardeep Seeboruth
+﻿
+// Amardeep Seeboruth
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -34,17 +35,17 @@ public class Flashlight : MonoBehaviour
 
         if (triggerFlashlight)
         {
-            flashlightBattery -= Time.time * 0.0009f; // reduce battery by 0.01
+            flashlightBattery -= Time.time * 0.001f; // reduce battery by 0.01
             if (flashlightBattery <= 0f)
             {
                 triggerFlashlight = false;
             }
-            
-            else if (flashlightBattery <= 20)
+
+            else if (flashlightBattery <= 30)
             {
-                flashlight.intensity -= Time.time * 0.00001f;
+                flashlight.intensity -= Time.time * 0.0001f;
             }
         }
-       
+
     }
 }
