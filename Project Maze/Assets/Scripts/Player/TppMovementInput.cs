@@ -13,17 +13,12 @@ public class TppMovementInput : MonoBehaviour
     public float allowPlayerRotation;
     public Camera tppCam;
     public Animator anim;
-    public PlayerController controller;
-    private float verticalVel;
-    private Vector3 moveVector;
 
 
     // Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<Animator>();
-        controller = GetComponent<PlayerController>();
-        
     }
 
     // Update is called once per frame
@@ -31,8 +26,8 @@ public class TppMovementInput : MonoBehaviour
     {
         InputMagnitude();
     }
-    
-    void PlayerMoveAndRotation()
+
+    void PlayerRotation()
     {
         InputX = Input.GetAxis("Horizontal");
         InputZ = Input.GetAxis("Vertical");
@@ -47,6 +42,7 @@ public class TppMovementInput : MonoBehaviour
         right.Normalize();
 
         desiredMoveDirection = forward * InputZ + right * InputX;
+        
 
         if(blockRotationPlayer == false)
         {
@@ -57,25 +53,23 @@ public class TppMovementInput : MonoBehaviour
     //controls the animation
     void InputMagnitude()
     {
-        InputX = controller.inputX;
-        InputZ = controller.inputY;
+        InputX = Input.GetAxis("Horizontal");
+        InputZ = Input.GetAxis("Vertical");
 
         // change 0.0f to delay animation transition
         anim.SetFloat("InputZ", InputZ, 0.0f, Time.deltaTime * 2.0f);
         anim.SetFloat("InputX", InputX, 0.0f, Time.deltaTime * 2.0f);
 
         speed = new Vector2(InputX, InputZ).sqrMagnitude;
-
         // physically move the player
         if(speed > allowPlayerRotation)
         {
             anim.SetFloat("InputMagnitude", speed, 0.0f, Time.deltaTime);
-            PlayerMoveAndRotation();
+            PlayerRotation();
         }
         else if (speed < allowPlayerRotation)
         {
             anim.SetFloat("InputMagnitude", speed, 0.0f, Time.deltaTime);
         }
-        
     }
 }

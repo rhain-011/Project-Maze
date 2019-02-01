@@ -18,8 +18,6 @@ public class PlayerController : MonoBehaviour
     private float fallMultiplier;
     private Vector3 moveDir = Vector3.zero;
     public Vector3 targetMoveAmount = Vector3.zero;
-    public float inputX = 0.0f;
-    public float inputY = 0.0f;
     private Rigidbody rb;
     private PlayerStatManager playerStat;
     private Animator anim;
@@ -27,9 +25,9 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.FreezeRotation;
-        anim = GetComponent<Animator>();
         playerStat = GetComponent<PlayerStatManager>();
         walkSpeed = playerStat.p_DefaultWalkSpeed;
         sprintSpeed = playerStat.p_DefaultRunSpeed;
@@ -41,12 +39,11 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         // Calculate movement:
-        inputX = Input.GetAxis("Horizontal");
-        inputY = Input.GetAxis("Vertical");
+        float inputX = Input.GetAxis("Horizontal");
+        float inputY = Input.GetAxis("Vertical");
 
         float finalInputX = inputX * walkSpeed * Time.deltaTime;
         float finalInputY = inputY * walkSpeed * Time.deltaTime;
-
 
         moveDir = new Vector3(finalInputX, 0, finalInputY);
         

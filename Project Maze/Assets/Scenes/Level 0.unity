@@ -352,7 +352,7 @@ MonoBehaviour:
   camFollowObj: {fileID: 1764779576}
   camMoveSpeed: 120
   clampAngle: 60
-  inputSensitivity: 50
+  inputSensitivity: 150
   mouseX: 0
   mouseY: 0
   finalInputX: 0
@@ -370,7 +370,7 @@ Transform:
   m_Children:
   - {fileID: 985965661}
   m_Father: {fileID: 1660082801}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &480630306
 GameObject:
@@ -1535,8 +1535,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   targetMoveAmount: {x: 0, y: 0, z: 0}
-  inputX: 0
-  inputY: 0
 --- !u!114 &1660082799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1576,7 +1574,6 @@ MonoBehaviour:
   allowPlayerRotation: 0
   tppCam: {fileID: 985965659}
   anim: {fileID: 1660082805}
-  controller: {fileID: 1660082798}
 --- !u!4 &1660082801 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400138, guid: 5c293eb09b7357e4bb5b7273e88caaae,
@@ -1873,8 +1870,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   targetMoveAmount: {x: 0, y: 0, z: 0}
-  inputX: 0
-  inputY: 0
 --- !u!114 &1749366450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2149,7 +2144,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1660082801}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1971370361
 GameObject:
