@@ -54,7 +54,7 @@ public class TppMovementInput : MonoBehaviour
         }
 
         isRunning = Input.GetKey(KeyCode.LeftShift);
-        float targetSpeed = ((isRunning) ? walkSpeed : sprintSpeed) * inputDir.magnitude;
+        float targetSpeed = ((isRunning) ? sprintSpeed : walkSpeed) * inputDir.magnitude;
         currentSpeed = Mathf.SmoothDamp(currentSpeed, targetSpeed, ref speedSmoothVelocity, speedSmoothTime);
 
         transform.Translate(transform.forward * currentSpeed * Time.deltaTime, Space.World);
