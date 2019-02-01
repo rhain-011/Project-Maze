@@ -11,16 +11,19 @@ public class PlayerController : MonoBehaviour
     [SerializeField] bool isGrounded;
     public Transform groundCheck;
     public LayerMask groundedMask;
+    
+    private Vector3 moveDir = Vector3.zero;
+    public Vector3 targetMoveAmount = Vector3.zero;
 
     private float walkSpeed;
     private float sprintSpeed;
     private float jumpForce;
     private float fallMultiplier;
-    private Vector3 moveDir = Vector3.zero;
-    public Vector3 targetMoveAmount = Vector3.zero;
+    
     private Rigidbody rb;
     private PlayerStatManager playerStat;
     private Animator anim;
+
 
     // Start is called before the first frame update
     void Awake()
