@@ -8,6 +8,8 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
 {
+
+    [SerializeField] bool isRunning;
     [SerializeField] bool isGrounded;
     public Transform groundCheck;
     public LayerMask groundedMask;
@@ -19,7 +21,12 @@ public class PlayerController : MonoBehaviour
     private float sprintSpeed;
     private float jumpForce;
     private float fallMultiplier;
-    
+
+    public float speedSmoothTime = 0.0f;
+    private float turnSmoothVelocity;
+    private float speedSmoothVelocity;
+    private float currentSpeed;
+
     private Rigidbody rb;
     private PlayerStatManager playerStat;
     private Animator anim;
@@ -78,14 +85,26 @@ public class PlayerController : MonoBehaviour
 
         // move player
         targetMoveAmount = moveDir;
-        
+
         // run
-        if (Input.GetKey("left shift"))
-        {
-            targetMoveAmount = moveDir * sprintSpeed;
-        }
+        //if (Input.GetKey("left shift"))
+        //{
+        //    targetMoveAmount = moveDir * sprintSpeed;
+        //}
 
-        transform.Translate(targetMoveAmount);
+        //transform.Translate(targetMoveAmount);
 
+        Vector2 inputDir = new Vector2 (inputX, inputY).normalized;
+
+
+        isRunning = Input.GetKey(KeyCode.LeftShift);
+        float targetSpeed = ((isRunning) ? sprintSpeed : walkSpeed) * inputDir.magnitude;
+        currentSpeed = Mathf.SmoothDamp(currentSpeed, targetSpeed, ref speedSmoothVelocity, speedSmoothTime);
+
+        //transform.Translate(transform.forward * currentSpeed * Time.deltaTime, Space.World);
+        transform.Translate(targetMoveAmount * currentSpeed);
+
+        float animSpeedPercent = ((isRunning) ? 1 : 0.5f) * inputDir.magnitude;
+        anim.SetFloat("speedPercent", animSpeedPercent, speedSmoothTime, Time.deltaTime);
     }
 }

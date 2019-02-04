@@ -360,7 +360,7 @@ MonoBehaviour:
   camTarget: {fileID: 1764779577}
   clampAngle: 60
   inputSensitivity: 80
-  distanceFromTarget: 1.6
+  distanceFromTarget: 0
   mouseX: 0
   mouseY: 0
   inputX: 0
@@ -805,13 +805,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 727937049}
-  m_LocalRotation: {x: 0.24619603, y: -0, z: -0, w: 0.96922004}
-  m_LocalPosition: {x: 0, y: 4.77, z: -4.85}
+  m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
+  m_LocalPosition: {x: 0, y: 7, z: -4.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 28.505001, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
 --- !u!114 &727937051
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -827,7 +827,7 @@ MonoBehaviour:
   m_Player: {fileID: 1660082801}
   m_SmoothSpeed: 0.5
   m_Heigth: 5
-  zOffset: 5
+  zOffset: 4.2
 --- !u!81 &727937052
 AudioListener:
   m_ObjectHideFlags: 0
@@ -1632,12 +1632,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bfe7685f125fe848a2022407714a831, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isRunning: 0
   isGrounded: 0
   groundCheck: {fileID: 1606436086}
   groundedMask:
     serializedVersion: 2
     m_Bits: 512
   targetMoveAmount: {x: 0, y: 0, z: 0}
+  speedSmoothTime: 0
 --- !u!114 &1660082799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1653,7 +1655,7 @@ MonoBehaviour:
   p_Health: 100
   p_Stamina: 50
   p_DefaultWalkSpeed: 1.2
-  p_DefaultRunSpeed: 2
+  p_DefaultRunSpeed: 2.5
   p_DefaultJumForce: 220
   p_DefaultFallMultiplier: 1.5
 --- !u!114 &1660082800
@@ -1750,6 +1752,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ThirdPersonCam: {fileID: 475996485}
   FirstPersonCam: {fileID: 1971370361}
+  TopDownCam: {fileID: 727937049}
   CamMode: 0
 --- !u!1 &1674030850
 GameObject:
@@ -1892,12 +1895,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bfe7685f125fe848a2022407714a831, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isRunning: 0
   isGrounded: 0
   groundCheck: {fileID: 1467773668}
   groundedMask:
     serializedVersion: 2
     m_Bits: 512
   targetMoveAmount: {x: 0, y: 0, z: 0}
+  speedSmoothTime: 0
 --- !u!114 &1749366450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2154,7 +2159,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1764779577}
   m_Layer: 0
-  m_Name: CameraTargetTPP
+  m_Name: CameraTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2172,7 +2177,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1660082801}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1971370361
 GameObject:
@@ -2206,7 +2211,7 @@ Transform:
   - {fileID: 149103729}
   - {fileID: 1674030851}
   m_Father: {fileID: 1660082801}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!81 &1971370363
 AudioListener:

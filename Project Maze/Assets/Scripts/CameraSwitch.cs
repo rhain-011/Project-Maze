@@ -10,7 +10,7 @@ public class CameraSwitch : MonoBehaviour
 
     public GameObject ThirdPersonCam; // 0
     public GameObject FirstPersonCam; // 1
-    //public GameObject TopDownCam;     // 2
+    public GameObject TopDownCam;     // 2
     public int CamMode;
 
     void Start()
@@ -26,9 +26,13 @@ public class CameraSwitch : MonoBehaviour
     {
         if (Input.GetButtonDown("ChangeCamera"))
         {
-            if (CamMode == 1)
+            if (CamMode == 2)
             {
                 CamMode = 0;
+            }
+            else if (CamMode == 1)
+            {
+                CamMode = 2;
             }
             else
             {
@@ -45,6 +49,7 @@ public class CameraSwitch : MonoBehaviour
         yield return new WaitForSeconds(0.01f);
         if(CamMode == 0)
         {
+            TopDownCam.SetActive(false);
             ThirdPersonCam.SetActive(false);
             tppController.enabled = false;
             FirstPersonCam.SetActive(true);
@@ -58,6 +63,15 @@ public class CameraSwitch : MonoBehaviour
             FirstPersonCam.SetActive(false);
             fppCamController.enabled = false;
             fppController.enabled = false;
+        }
+        if (CamMode == 2)
+        {
+            ThirdPersonCam.SetActive(false);
+            tppController.enabled = false;
+            FirstPersonCam.SetActive(false);
+            fppCamController.enabled = false;
+            fppController.enabled = false;
+            TopDownCam.SetActive(true);
         }
     }
 }
