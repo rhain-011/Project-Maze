@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.04345821, g: 0.041858047, b: 0.044895597, a: 1}
+  m_IndirectSpecularColor: {r: 0.04344748, g: 0.04184796, b: 0.044882335, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -262,6 +262,26 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: 5c293eb09b7357e4bb5b7273e88caaae, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 4c34f2f3524ec6045a1fedcc8d65cfce, type: 2}
+    - target: {fileID: 9500000, guid: 5c293eb09b7357e4bb5b7273e88caaae, type: 3}
+      propertyPath: m_UpdateMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: 5c293eb09b7357e4bb5b7273e88caaae, type: 3}
+      propertyPath: m_CullingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: 5c293eb09b7357e4bb5b7273e88caaae, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: 5c293eb09b7357e4bb5b7273e88caaae, type: 3}
+      propertyPath: m_WarningMessage
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 400138, guid: 5c293eb09b7357e4bb5b7273e88caaae, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -305,26 +325,6 @@ PrefabInstance:
     - target: {fileID: 400138, guid: 5c293eb09b7357e4bb5b7273e88caaae, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9500000, guid: 5c293eb09b7357e4bb5b7273e88caaae, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 4c34f2f3524ec6045a1fedcc8d65cfce, type: 2}
-    - target: {fileID: 9500000, guid: 5c293eb09b7357e4bb5b7273e88caaae, type: 3}
-      propertyPath: m_UpdateMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9500000, guid: 5c293eb09b7357e4bb5b7273e88caaae, type: 3}
-      propertyPath: m_CullingMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9500000, guid: 5c293eb09b7357e4bb5b7273e88caaae, type: 3}
-      propertyPath: m_ApplyRootMotion
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9500000, guid: 5c293eb09b7357e4bb5b7273e88caaae, type: 3}
-      propertyPath: m_WarningMessage
-      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c293eb09b7357e4bb5b7273e88caaae, type: 3}
@@ -2398,7 +2398,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2114983694}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.15, y: 0.5, z: 3.16}
+  m_LocalPosition: {x: -2.16, y: 0.5, z: 0.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2015802671}
