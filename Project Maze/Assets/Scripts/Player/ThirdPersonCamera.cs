@@ -1,4 +1,7 @@
-﻿using System;
+﻿/*
+ Coded by: Rhainel Peralta
+ */
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
